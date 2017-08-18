@@ -2,96 +2,87 @@ var Calculadora = {
   init: function() {
     this.variables()
     this.pulsarTeclas()
-
+    this.cargarPagina()
   },
-
-
-
+   cargarPagina: function()
+  { alert("Esta Calculadora permite realizar operaciones basicas como: Sumar, Restar, Multiplicar y Dividir.");
+},
 
   //cambiar tamaño de las teclas
 pulsarTeclas: function() {
-    var button = document.getElementsByClassName('teclas');
-    for (var i = 0; i < button.length; i++) {
-      button[i].onmousedown = this.buttonPulsado;
-      button[i].onmouseup = this.buttonArriba;
+    var boton = document.getElementsByClassName('tecla');
+    for (var i = 0; i < boton.length; i++) {
+      boton[i].onmousedown = this.botonPulsado;
+      boton[i].onmouseup = this.botonArriba;
     }
 },
 
-buttonPulsado: function(evento) {
-  evento.target.style.transform="scale(0.90, 0.90)";
+botonPulsado: function(evento) {
+  evento.target.style.transform="scale(0.92, 0.92)";
 },
 
-buttonArriba: function(evento) {
-  evento.target.style.transform="scale(1,)";
+botonArriba: function(evento) {
+  evento.target.style.transform="scale(1,1)";
 },
 
 
 variables: function(){
-
-
   var tecl = this
-
   document.getElementById('0').addEventListener('click', function() {
-    tecl.asignarValores(0)
-  })
+    tecl.asignarValores(0)})
+
   document.getElementById('1').addEventListener('click', function() {
-    tecl.asignarValores(1)
-  })
+    tecl.asignarValores(1) })
+
   document.getElementById('2').addEventListener('click', function() {
-    tecl.asignarValores(2)
-  })
+    tecl.asignarValores(2) })
   document.getElementById('3').addEventListener('click', function() {
-    tecl.asignarValores(3)
-  })
+    tecl.asignarValores(3) })
+
   document.getElementById('4').addEventListener('click', function() {
-    tecl.asignarValores(4)
-  })
+    tecl.asignarValores(4) })
+
   document.getElementById('5').addEventListener('click', function() {
-    tecl.asignarValores(5)
-  })
+    tecl.asignarValores(5) })
+
   document.getElementById('6').addEventListener('click', function() {
-    tecl.asignarValores(6)
-  })
+    tecl.asignarValores(6) })
+
   document.getElementById('7').addEventListener('click', function() {
-    tecl.asignarValores(7)
-  })
+    tecl.asignarValores(7) })
+
   document.getElementById('8').addEventListener('click', function() {
-    tecl.asignarValores(8)
-  })
+    tecl.asignarValores(8) })
+
   document.getElementById('9').addEventListener('click', function() {
-    tecl.asignarValores(9)
-  })
+    tecl.asignarValores(9) })
+
   document.getElementById('sign').addEventListener('click', function() {
-    tecl.signo()
-  })
+    tecl.signo() })
+
   document.getElementById('punto').addEventListener('click', function() {
-    tecl.anadirPunto()
-  })
+    tecl.anadirPunto() })
+
   document.getElementById('on').addEventListener('click', function() {
-    tecl.reset()
-  })
+    tecl.reset() })
+
   document.getElementById('mas').addEventListener('click', function() {
-  tecl.operaciones('1')
-  })
+  tecl.operaciones('1') })
 
   document.getElementById('menos').addEventListener('click', function() {
-  tecl.operaciones('2')
-  })
+  tecl.operaciones('2') })
 
   document.getElementById('por').addEventListener('click', function() {
-  tecl.operaciones('3')
-  })
+  tecl.operaciones('3') })
 
   document.getElementById('dividido').addEventListener('click', function() {
-  tecl.operaciones('4')
-  })
+  tecl.operaciones('4') })
+
   document.getElementById('igual').addEventListener('click', function() {
-	tecl.teclaIgual()
-	})
-
-
+	tecl.teclaIgual() })
 },//cierre llave varialbles
 
+//asignar valores
 asignarValores: function(valor){
   var tecl = this
   var element = document.getElementById('display')
@@ -108,7 +99,6 @@ asignarValores: function(valor){
       element.innerHTML = pantallalista;
     }
   }
-
 },//cierre llave asignar valores
 
 validacionNumeros: function(valor){
@@ -142,7 +132,6 @@ anadirPunto: function(){
 operaciones: function(valor){
   var tecl = this
   var element = document.getElementById('display')
-
   var varDisplay = Number(element.innerHTML)
   var varOperacion = valor
 
@@ -153,27 +142,22 @@ operaciones: function(valor){
     if(sessionStorage.operacionActiva=='1'){
       sessionStorage.valor = tecl.resultado(sessionStorage.valor, varDisplay, sessionStorage.operacion, 1)
       sessionStorage.result = 0
-
-    }else{
-      sessionStorage.valor = Number(varDisplay);
+      }else{
+        sessionStorage.valor = Number(varDisplay);
     }
   }
-
   if(varDisplay!=''){
     sessionStorage.valorGuardado = Number(varDisplay);
   }
-
   sessionStorage.countOperadorIgual = 0
   sessionStorage.operacionActiva = 1;
   sessionStorage.operacion = varOperacion;
   element.innerHTML = '';
-
 },// fin llave operaciones
 
 teclaIgual: function(){
 		var igual = this
 		var element = document.getElementById('display');
-
 		var varDisplay 	= sessionStorage.valor
 		var varOperacion 	= sessionStorage.operacion
 		var varDisplayNew	= element.innerHTML
@@ -184,7 +168,6 @@ teclaIgual: function(){
 			sessionStorage.valor = varDisplayNew
 			sessionStorage.countOperadorIgual = 1
 		}
-
 		element.innerHTML = igual.resultado(varDisplay, varDisplayNew, varOperacion, 0)
 	},//fin de la llave igual
 
@@ -192,18 +175,14 @@ teclaIgual: function(){
 addSigno: function(){
   var element = document.getElementById('display')
   if(element.innerHTML.indexOf('-')<0 && element.innerHTML!='0' && element.innerHTML!=''){
-
     document.getElementById('display').innerHTML = '-'+element.innerHTML;
   }else if(element.innerHTML!=0 && element.innerHTML!=''){
-
     document.getElementById('display').innerHTML = element.innerHTML.substring(1);
   }
 },//Fin de la llave signos
 
-
 // function de resultado
 resultado: function(valor1, valor2, operacion, tipo){
-
 		var resul = this
 
 		switch(operacion){
@@ -227,7 +206,6 @@ resultado: function(valor1, valor2, operacion, tipo){
 		sessionStorage.ultimoResultado = resultadoValidado
 		return resultadoValidado;
 	}, //fin llave de resultados
-
 
  // funcion de borrado
 reset: function(){
