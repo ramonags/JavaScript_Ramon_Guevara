@@ -1,10 +1,33 @@
 var Calculadora = {
   init: function() {
     this.variables()
+    this.pulsarTeclas()
+
   },
+
+
+
+
   //cambiar tamaño de las teclas
+pulsarTeclas: function() {
+    var button = document.getElementsByClassName('teclas');
+    for (var i = 0; i < button.length; i++) {
+      button[i].onmousedown = this.buttonPulsado;
+      button[i].onmouseup = this.buttonArriba;
+    }
+},
+
+buttonPulsado: function(evento) {
+  evento.target.style.transform="scale(0.90, 0.90)";
+},
+
+buttonArriba: function(evento) {
+  evento.target.style.transform="scale(1,)";
+},
+
 
 variables: function(){
+
 
   var tecl = this
 
@@ -102,8 +125,9 @@ signo: function(){
 
     document.getElementById('display').innerHTML = element.innerHTML.substring(1);
   }
-},
+},// fin de la llave para los signo
 
+// funcion para agregar punto
 anadirPunto: function(){
   var punto = this
   var element = document.getElementById('display')
@@ -113,7 +137,7 @@ anadirPunto: function(){
     element.innerHTML = pantallalista;
 
   }
-},
+}, //fin de la llave de añadir punto
 
 operaciones: function(valor){
   var tecl = this
@@ -164,6 +188,7 @@ teclaIgual: function(){
 		element.innerHTML = igual.resultado(varDisplay, varDisplayNew, varOperacion, 0)
 	},//fin de la llave igual
 
+ // function de añadir signos
 addSigno: function(){
   var element = document.getElementById('display')
   if(element.innerHTML.indexOf('-')<0 && element.innerHTML!='0' && element.innerHTML!=''){
@@ -175,6 +200,8 @@ addSigno: function(){
   }
 },//Fin de la llave signos
 
+
+// function de resultado
 resultado: function(valor1, valor2, operacion, tipo){
 
 		var resul = this
@@ -199,10 +226,10 @@ resultado: function(valor1, valor2, operacion, tipo){
 		sessionStorage.result = 1
 		sessionStorage.ultimoResultado = resultadoValidado
 		return resultadoValidado;
-	},
+	}, //fin llave de resultados
 
 
-
+ // funcion de borrado
 reset: function(){
   document.getElementById('display').innerHTML = '0';
     sessionStorage.result = 0;
@@ -212,10 +239,7 @@ reset: function(){
 		sessionStorage.countOperadorIgual =0
     sessionStorage.valor = 0;
     sessionStorage.operacion = 0;
-}
-
-
-
+  }//cierre llave reset..
 
 }//cierre llave var Calculadora
 
